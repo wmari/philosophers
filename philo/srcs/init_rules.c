@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 14:27:40 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/11 16:51:43 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/11 19:05:07 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ t_rules init_rules(char **argv)
 {
 	t_rules rules;
 	int		i;
-	struct timeval time_now;
-	
+	struct timeval time_now = {0, 0};
+
 	gettimeofday(&time_now, NULL);
 	rules.nb_philo = atoi(argv[1]);
 	rules.time_to_die = atoi(argv[2]);

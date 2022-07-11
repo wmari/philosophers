@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 11:37:29 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/11 16:51:33 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/11 18:45:34 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	main(int argc, char **argv)
 	while (i < rules.nb_philo)
 	{
 		rules.philosopher[i]->rules = &rules;
-		pthread_create(&(rules.philosopher[i]->philo_th_id), NULL, routine, rules.philosopher[i]);
+		pthread_create(&(rules.philosopher[i]->philo_th_id), NULL,
+						routine, rules.philosopher[i]);
 		i++;
 	}
 	i = 0;

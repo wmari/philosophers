@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:38:28 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/18 18:37:17 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/18 20:02:25 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_philosopher
 	pthread_t		thread_id;
 	t_rules			*rules;
 	int				nb_of_eat;
+	pthread_mutex_t	check_eat;
 	struct timeval	birth;
 }t_philosopher;
 
@@ -68,5 +69,7 @@ void	go_sleep(t_philosopher *philo);
 int		deadyet(t_philosopher *philo);
 int		print_str_death(char *str, t_philosopher *philo);
 int		check_arg(int argc, char **argv);
-
+int		still_eat(t_philosopher *philo);
+int done_eating(t_philosopher *philo);
+int	full_course(t_rules *rules);
 #endif

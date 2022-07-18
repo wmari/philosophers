@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:46:52 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/18 19:20:36 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/18 19:52:05 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ static void	init_phil(t_rules *rules)
 		rules->philo[i] = malloc(sizeof(t_philosopher));
 		rules->philo[i]->id = i;
 		rules->philo[i]->nb_of_eat = rules->nb_of_eat;
+		gettimeofday(&(rules->philo[i]->birth), NULL);
 		pthread_mutex_init(&(rules->fork[i]), NULL);
+		pthread_mutex_init(&(rules->philo[i]->check_eat), NULL);
 		i++;
 	}
 	while (i < 1000)

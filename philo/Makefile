@@ -6,7 +6,7 @@
 #    By: wmari <wmari@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/07 10:08:22 by wmari             #+#    #+#              #
-#    Updated: 2022/07/18 18:39:23 by wmari            ###   ########.fr        #
+#    Updated: 2022/07/18 20:03:13 by wmari            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS	=	$(addprefix srcs/, \
 			go_eat.c \
 			go_sleep.c \
 			check_arg.c \
+			check_nb_of_eat.c \
 			)
 
 OBJS	=	$(SRCS:.c=.o)

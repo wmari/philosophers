@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:46:09 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/18 19:20:11 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/18 20:13:12 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	deathloop(t_rules *rules)
 				break ;
 			i++;
 		}
-		if (deadyet(rules->philo[0]))
+		if (deadyet(rules->philo[0]) || !full_course(rules))
 			break ;
 		i = 0;
 	}
@@ -48,6 +48,7 @@ int	main(int argc, char **argv)
 			start_sim, rules->philo[i]);
 		i++;
 	}
+	usleep(1000);
 	deathloop(rules);
 	i = 0;
 	while (i < rules->nb_philo)

@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:45:50 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/18 19:14:21 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/18 20:14:28 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	go_eat(t_philosopher *philo)
 	else if (philo->id != 0)
 		pthread_mutex_unlock(&(philo->rules->fork[0]));
 	else
+		return ;
+	if (still_eat(philo))
 		return ;
 	gettimeofday(&(philo->birth), NULL);
 	if (!deadyet(philo))

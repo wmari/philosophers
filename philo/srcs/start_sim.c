@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   start_sim.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 11:55:53 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/11 16:43:54 by wmari            ###   ########.fr       */
+/*   Created: 2022/07/18 15:03:21 by wmari             #+#    #+#             */
+/*   Updated: 2022/07/18 19:12:15 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void	*routine(void *philo)
+void	*start_sim(void *data)
 {
-	t_philosopher *phil;
+	t_philosopher	*philo;
 
-	phil = (t_philosopher*)philo;
-	print_str("is thinking", phil);
-	go_eat(phil);
+	philo = (t_philosopher *)data;
+	gettimeofday(&(philo->birth), NULL);
+	print_str("is thinking", philo);
+	usleep(5);
+	if (!check_death(philo))
+		go_eat(philo);
 	return (NULL);
 }

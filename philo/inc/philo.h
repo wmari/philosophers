@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 11:16:36 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/18 12:43:16 by wmari            ###   ########.fr       */
+/*   Created: 2022/07/18 14:38:28 by wmari             #+#    #+#             */
+/*   Updated: 2022/07/18 18:37:17 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,39 +20,53 @@
 # include <string.h>
 # include <sys/time.h>
 
-struct	s_philosopher;
+struct s_philosopher;
 
-typedef struct	s_rules
+typedef struct s_death
 {
-	int				nb_philo;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				notdeadyet;
-	struct s_philosopher	*philosopher[100];
-	pthread_mutex_t	fork[100];
-	pthread_mutex_t	microphone;
+	int			dead;
 	pthread_mutex_t	death;
-	struct timeval	genese;
+}t_death;
+
+typedef struct s_watch
+{
+	struct timeval	time;
+	pthread_mutex_t	watch;
+}t_watch;
+
+typedef struct s_rules
+{
+	int						nb_philo;
+	int						time_to_die;
+	int						time_to_eat;
+	int						time_to_sleep;
+	int						nb_of_eat;
+	t_death					death;
+	struct s_philosopher	*philo[1000];
+	pthread_mutex_t			fork[1000];
+	pthread_mutex_t			microphone;
+	t_watch					genese;
 }t_rules;
 
-typedef struct	s_philosopher
+typedef struct s_philosopher
 {
-	int			id;
-	pthread_t	philo_th_id;
-	t_rules		*rules;
-	struct timeval state_since_eat;
-	int			nb_of_time_eat;
-	
+	int				id;
+	pthread_t		thread_id;
+	t_rules			*rules;
+	int				nb_of_eat;
+	struct timeval	birth;
 }t_philosopher;
 
-void	*routine(void *philo);
-void	fton_exit(t_rules rules);
-t_rules init_rules(char **argv);
-void	go_eat(t_philosopher *philo);
-void	sleep_and_repeat(t_philosopher *philo);
-void	print_str(char *str, t_philosopher *philo);
-void	is_it_dead(t_philosopher *philo);
+t_rules	*init_rules(int argc, char **argv);
+void	quit_sim(t_rules *rules);
+void	*start_sim(void *data);
+int		print_str(char *str, t_philosopher *philo);
+void	quit_philo(t_rules *rules);
 int		check_death(t_philosopher *philo);
+void	go_eat(t_philosopher *philo);
+void	go_sleep(t_philosopher *philo);
+int		deadyet(t_philosopher *philo);
+int		print_str_death(char *str, t_philosopher *philo);
+int		check_arg(int argc, char **argv);
 
 #endif

@@ -5,32 +5,52 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 11:37:29 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/11 18:45:34 by wmari            ###   ########.fr       */
+/*   Created: 2022/07/18 14:46:09 by wmari             #+#    #+#             */
+/*   Updated: 2022/07/18 19:20:11 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
+static void	deathloop(t_rules *rules)
+{
+	int	i;
 
+	i = 0;
+	while (1)
+	{
+		while (i < rules->nb_philo)
+		{
+			if (check_death(rules->philo[i]))
+				break ;
+			i++;
+		}
+		if (deadyet(rules->philo[0]))
+			break ;
+		i = 0;
+	}
+}
 
 int	main(int argc, char **argv)
 {
-	t_rules	rules;
-	int i;
+	t_rules	*rules;
+	int		i;
 
-	(void)argc;
+	if (check_arg(argc, argv))
+		return (0);
 	i = 0;
-	rules = init_rules(argv);
-	while (i < rules.nb_philo)
+	rules = init_rules(argc, argv);
+	gettimeofday(&(rules->genese.time), NULL);
+	while (i < rules->nb_philo)
 	{
-		rules.philosopher[i]->rules = &rules;
-		pthread_create(&(rules.philosopher[i]->philo_th_id), NULL,
-						routine, rules.philosopher[i]);
+		rules->philo[i]->rules = rules;
+		pthread_create(&(rules->philo[i]->thread_id), NULL,
+			start_sim, rules->philo[i]);
 		i++;
 	}
+	deathloop(rules);
 	i = 0;
-	while (i < rules.nb_philo)
-		pthread_join(rules.philosopher[i++]->philo_th_id, NULL);
-	fton_exit(rules);
+	while (i < rules->nb_philo)
+		pthread_join(rules->philo[i++]->thread_id, NULL);
+	quit_philo(rules);
 }

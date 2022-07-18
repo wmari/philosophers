@@ -5,49 +5,41 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 13:56:04 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/18 12:29:23 by wmari            ###   ########.fr       */
+/*   Created: 2022/07/18 15:45:50 by wmari             #+#    #+#             */
+/*   Updated: 2022/07/18 19:14:21 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-static void	go_eat_even(t_philosopher *philo)
-{
-	if (philo->id + 1 < philo->rules->nb_philo)
-		pthread_mutex_lock(&(philo->rules->fork[philo->id + 1]));
-	else
-		pthread_mutex_lock(&(philo->rules->fork[0]));
-	pthread_mutex_lock(&(philo->rules->fork[philo->id]));
-	print_str("is eating", philo);
-	usleep(philo->rules->time_to_eat);
-	gettimeofday(&(philo->state_since_eat), NULL);
-	pthread_mutex_unlock(&(philo->rules->fork[philo->id]));
-	if (philo->id + 1 < philo->rules->nb_philo)
-		pthread_mutex_unlock(&(philo->rules->fork[philo->id + 1]));
-	else
-		pthread_mutex_unlock(&(philo->rules->fork[0]));
-	if (!check_death(philo))
-		sleep_and_repeat(philo);
-}
-
 static void	go_eat_odd(t_philosopher *philo)
 {
-	pthread_mutex_lock(&(philo->rules->fork[philo->id]));
+	usleep(5);
 	if (philo->id + 1 < philo->rules->nb_philo)
 		pthread_mutex_lock(&(philo->rules->fork[philo->id + 1]));
 	else
 		pthread_mutex_lock(&(philo->rules->fork[0]));
+	print_str("has taken a fork", philo);
+	pthread_mutex_lock(&(philo->rules->fork[philo->id]));
+	print_str("has taken a fork", philo);
 	print_str("is eating", philo);
 	usleep(philo->rules->time_to_eat);
-	gettimeofday(&(philo->state_since_eat), NULL);
-	pthread_mutex_unlock(&(philo->rules->fork[philo->id]));
+}
+
+static void	go_eat_even(t_philosopher *philo)
+{
+	usleep(5);
+	pthread_mutex_lock(&(philo->rules->fork[philo->id]));
+	print_str("has taken a fork", philo);
 	if (philo->id + 1 < philo->rules->nb_philo)
-		pthread_mutex_unlock(&(philo->rules->fork[philo->id + 1]));
+		pthread_mutex_lock(&(philo->rules->fork[philo->id + 1]));
+	else if (philo->id != 0)
+		pthread_mutex_lock(&(philo->rules->fork[0]));
 	else
-		pthread_mutex_unlock(&(philo->rules->fork[0]));
-	if (!check_death(philo))
-		sleep_and_repeat(philo);
+		return ;
+	print_str("has taken a fork", philo);
+	print_str("is eating", philo);
+	usleep(philo->rules->time_to_eat);
 }
 
 void	go_eat(t_philosopher *philo)
@@ -56,4 +48,14 @@ void	go_eat(t_philosopher *philo)
 		go_eat_even(philo);
 	else
 		go_eat_odd(philo);
+	pthread_mutex_unlock(&(philo->rules->fork[philo->id]));
+	if (philo->id + 1 < philo->rules->nb_philo)
+		pthread_mutex_unlock(&(philo->rules->fork[philo->id + 1]));
+	else if (philo->id != 0)
+		pthread_mutex_unlock(&(philo->rules->fork[0]));
+	else
+		return ;
+	gettimeofday(&(philo->birth), NULL);
+	if (!deadyet(philo))
+		go_sleep(philo);
 }

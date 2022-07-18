@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:38:28 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/18 20:02:25 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/18 20:18:38 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int		deadyet(t_philosopher *philo);
 int		print_str_death(char *str, t_philosopher *philo);
 int		check_arg(int argc, char **argv);
 int		still_eat(t_philosopher *philo);
-int done_eating(t_philosopher *philo);
-int	full_course(t_rules *rules);
+int 	done_eating(t_philosopher *philo);
+int		full_course(t_rules *rules);
+int		ft_atoi(const char *str);
+
 #endif

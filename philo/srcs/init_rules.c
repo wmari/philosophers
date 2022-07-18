@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:46:52 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/18 19:52:05 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/18 20:19:08 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ t_rules	*init_rules(int argc, char **argv)
 	t_rules	*rules;
 
 	rules = malloc(sizeof(t_rules));
-	rules->nb_philo = atoi(argv[1]);
-	rules->time_to_die = atoi(argv[2]);
-	rules->time_to_eat = atoi(argv[3]);
-	rules->time_to_sleep = atoi(argv[4]);
+	rules->nb_philo = ft_atoi(argv[1]);
+	rules->time_to_die = ft_atoi(argv[2]);
+	rules->time_to_eat = ft_atoi(argv[3]);
+	rules->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 5)
 		rules->nb_of_eat = -1;
 	else
-		rules->nb_of_eat = atoi(argv[5]);
+		rules->nb_of_eat = ft_atoi(argv[5]);
 	init_phil(rules);
 	pthread_mutex_init(&(rules->microphone), NULL);
 	pthread_mutex_init(&(rules->death.death), NULL);

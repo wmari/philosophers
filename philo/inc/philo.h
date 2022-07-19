@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:38:28 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 15:44:36 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/19 17:28:37 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct s_philosopher
 	int				nb_of_eat;
 	pthread_mutex_t	check_eat;
 	pthread_mutex_t	is_born;
-	pthread_mutex_t	is_eating;
 	int				eating;
 	struct timeval	birth;
 }t_philosopher;

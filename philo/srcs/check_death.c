@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:15:57 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 16:10:58 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/19 17:55:21 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,12 @@ int	check_death(t_philosopher *philo)
 	time_genese = (philo->birth.tv_sec * 1000) + (philo->birth.tv_usec / 1000);
 	pthread_mutex_unlock(&(philo->is_born));
 	time_since_meal = time_ms - time_genese;
-	//printf("time_since_meal de %d : %ld\n", philo->id, time_since_meal);
 	if (time_since_meal > philo->rules->time_to_die)
 	{
 		pthread_mutex_lock(&(philo->rules->death.death));
 		if (philo->rules->death.dead == 0)
 		{
 			philo->rules->death.dead = 1;
-			printf("time_since_meal = %ld, time_last_meal = %ld, time_now = %ld\n", time_since_meal, time_genese, time_ms);
 			pthread_mutex_unlock(&(philo->rules->death.death));
 			print_str_death("is dead", philo);
 		}

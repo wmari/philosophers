@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:59:42 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 16:23:22 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/19 18:09:56 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,19 @@
 
 void	my_sleep(int time_to_do)
 {
-	int	i;
+	struct timeval	time_begin;
+	struct timeval	time_end;
+	long int		time_b;
+	long int		time_e;
 
-	i = 0;
-	while (i++ < time_to_do)
-		usleep(1000);
+	gettimeofday(&time_begin, NULL);
+	time_end = time_begin;
+	time_b = time_begin.tv_sec * 1000 + time_begin.tv_usec / 1000;
+	time_e = time_end.tv_sec * 1000 + time_end.tv_usec / 1000;
+	while (time_e < time_b + time_to_do)
+	{
+		gettimeofday(&time_end, NULL);
+		time_e = time_end.tv_sec * 1000 + time_end.tv_usec / 1000;
+		usleep(100);
+	}
 }

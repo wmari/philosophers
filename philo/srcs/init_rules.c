@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:46:52 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 16:18:54 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/19 17:28:33 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	init_phil(t_rules *rules)
 		pthread_mutex_init(&(rules->fork[i]), NULL);
 		pthread_mutex_init(&(rules->philo[i]->check_eat), NULL);
 		pthread_mutex_init(&(rules->philo[i]->is_born), NULL);
-		pthread_mutex_init(&(rules->philo[i]->is_eating), NULL);
 		i++;
 	}
 	while (i < 1000)

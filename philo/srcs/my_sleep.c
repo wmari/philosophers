@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   go_sleep.c                                         :+:      :+:    :+:   */
+/*   my_sleep.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/18 15:58:14 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 15:01:48 by wmari            ###   ########.fr       */
+/*   Created: 2022/07/19 13:59:42 by wmari             #+#    #+#             */
+/*   Updated: 2022/07/19 16:23:22 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void	go_sleep(t_philosopher *philo)
+void	my_sleep(int time_to_do)
 {
-	print_str("is sleeping", philo);
-	my_sleep(philo->rules->time_to_sleep);
-	if (!deadyet(philo))
-	{
-		print_str("is thinking", philo);
-		if (!deadyet(philo))
-			go_eat(philo);
-	}
+	int	i;
+
+	i = 0;
+	while (i++ < time_to_do)
+		usleep(1000);
 }

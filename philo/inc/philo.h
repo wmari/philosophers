@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:38:28 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/18 20:22:42 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/19 15:44:36 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ typedef struct s_philosopher
 	t_rules			*rules;
 	int				nb_of_eat;
 	pthread_mutex_t	check_eat;
+	pthread_mutex_t	is_born;
+	pthread_mutex_t	is_eating;
+	int				eating;
 	struct timeval	birth;
 }t_philosopher;
 
@@ -73,5 +76,6 @@ int		still_eat(t_philosopher *philo);
 int		done_eating(t_philosopher *philo);
 int		full_course(t_rules *rules);
 int		ft_atoi(const char *str);
-
+void	my_sleep(int time_to_do);
+void	ft_put_all(long int time, int id, char *str);
 #endif

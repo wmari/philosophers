@@ -6,15 +6,28 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:45:50 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/18 20:14:28 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/19 16:05:05 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
+static void	end_eat(t_philosopher *philo)
+{
+	pthread_mutex_lock(&(philo->is_eating));
+	philo->eating = 0;
+	pthread_mutex_unlock(&(philo->is_eating));	
+}
+
+static void	start_eat(t_philosopher *philo)
+{
+	pthread_mutex_lock(&(philo->is_eating));
+	philo->eating = 1;
+	pthread_mutex_unlock(&(philo->is_eating));
+}
+
 static void	go_eat_odd(t_philosopher *philo)
 {
-	usleep(5);
 	if (philo->id + 1 < philo->rules->nb_philo)
 		pthread_mutex_lock(&(philo->rules->fork[philo->id + 1]));
 	else
@@ -22,13 +35,13 @@ static void	go_eat_odd(t_philosopher *philo)
 	print_str("has taken a fork", philo);
 	pthread_mutex_lock(&(philo->rules->fork[philo->id]));
 	print_str("has taken a fork", philo);
+	start_eat(philo);
 	print_str("is eating", philo);
-	usleep(philo->rules->time_to_eat);
+	my_sleep(philo->rules->time_to_eat);
 }
 
 static void	go_eat_even(t_philosopher *philo)
 {
-	usleep(5);
 	pthread_mutex_lock(&(philo->rules->fork[philo->id]));
 	print_str("has taken a fork", philo);
 	if (philo->id + 1 < philo->rules->nb_philo)
@@ -38,8 +51,9 @@ static void	go_eat_even(t_philosopher *philo)
 	else
 		return ;
 	print_str("has taken a fork", philo);
+	start_eat(philo);
 	print_str("is eating", philo);
-	usleep(philo->rules->time_to_eat);
+	my_sleep(philo->rules->time_to_eat);
 }
 
 void	go_eat(t_philosopher *philo)
@@ -57,7 +71,10 @@ void	go_eat(t_philosopher *philo)
 		return ;
 	if (still_eat(philo))
 		return ;
+	pthread_mutex_lock(&(philo->is_born));
 	gettimeofday(&(philo->birth), NULL);
+	pthread_mutex_unlock(&(philo->is_born));
+	end_eat(philo);
 	if (!deadyet(philo))
 		go_sleep(philo);
 }

@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:03:21 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 18:34:47 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/19 19:24:29 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ void	*start_sim(void *data)
 		go_eat(philo);
 		if (done_eating(philo))
 			break ;
-		print_str("is sleeping", philo);
-		my_sleep(philo->rules->time_to_sleep);
-		print_str("is thinking", philo);
+		go_sleep(philo);
 	}
 	return (NULL);
 }

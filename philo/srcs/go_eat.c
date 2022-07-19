@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:45:50 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 18:21:53 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/19 19:34:17 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	go_eat_even(t_philosopher *philo)
 		pthread_mutex_lock(&(philo->rules->fork[0]));
 	else
 	{
-		my_sleep(philo->rules->time_to_die);
+		my_sleep(philo->rules->time_to_die + 20);
 		return ;
 	}
 	print_str("has taken a fork", philo);

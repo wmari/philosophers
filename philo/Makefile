@@ -6,7 +6,7 @@
 #    By: wmari <wmari@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/07 10:08:22 by wmari             #+#    #+#              #
-#    Updated: 2022/07/19 14:25:30 by wmari            ###   ########.fr        #
+#    Updated: 2022/07/20 18:55:30 by wmari            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS	=	$(addprefix srcs/, \
 			ft_atoi.c \
 			my_sleep.c \
 			utils.c \
+			take_fork.c \
 			)
 
 OBJS	=	$(SRCS:.c=.o)

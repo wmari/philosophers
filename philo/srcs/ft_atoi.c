@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 20:17:50 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/18 20:18:02 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 18:18:49 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_atoi(const char *str)
 {
 	int					sign;
-	unsigned int		ret;
+	long long int		ret;
 
 	ret = 0;
 	sign = 1;
@@ -33,5 +33,7 @@ int	ft_atoi(const char *str)
 		ret = (ret * 10) + (*str - 48);
 		str++;
 	}
-	return (ret * sign);
+	if (ret > 2147483647)
+		return (-1);
+	return ((int)ret * sign);
 }

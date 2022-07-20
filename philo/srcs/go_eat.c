@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:45:50 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 19:34:17 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 18:55:04 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,40 @@
 
 static void	go_eat_odd(t_philosopher *philo)
 {
-	if (philo->id + 1 < philo->rules->nb_philo)
-		pthread_mutex_lock(&(philo->rules->fork[philo->id + 1]));
-	else
-		pthread_mutex_lock(&(philo->rules->fork[0]));
-	print_str("has taken a fork", philo);
-	pthread_mutex_lock(&(philo->rules->fork[philo->id]));
-	print_str("has taken a fork", philo);
+	take_fork_left(philo);
+	take_fork_right(philo);
 	print_str("is eating", philo);
 	pthread_mutex_lock(&(philo->is_born));
 	gettimeofday(&(philo->birth), NULL);
 	pthread_mutex_unlock(&(philo->is_born));
 	my_sleep(philo->rules->time_to_eat);
+	leave_fork_left(philo);
+	leave_fork_right(philo);
 }
 
 static void	go_eat_even(t_philosopher *philo)
 {
-	pthread_mutex_lock(&(philo->rules->fork[philo->id]));
-	print_str("has taken a fork", philo);
-	if (philo->id + 1 < philo->rules->nb_philo)
-		pthread_mutex_lock(&(philo->rules->fork[philo->id + 1]));
-	else if (philo->id != 0)
-		pthread_mutex_lock(&(philo->rules->fork[0]));
-	else
-	{
-		my_sleep(philo->rules->time_to_die + 20);
-		return ;
-	}
-	print_str("has taken a fork", philo);
+	take_fork_right(philo);
+	take_fork_left(philo);
 	print_str("is eating", philo);
 	pthread_mutex_lock(&(philo->is_born));
 	gettimeofday(&(philo->birth), NULL);
 	pthread_mutex_unlock(&(philo->is_born));
 	my_sleep(philo->rules->time_to_eat);
+	leave_fork_right(philo);
+	leave_fork_left(philo);
 }
 
 void	go_eat(t_philosopher *philo)
 {
-	if (philo->id % 2 == 0)
+	if (philo->id + 1 > philo->rules->nb_philo && philo->id == 0)
+	{
+		take_fork_right(philo);
+		my_sleep(philo->rules->time_to_die + 10);
+	}
+	else if (philo->id % 2 == 0)
 		go_eat_even(philo);
 	else
 		go_eat_odd(philo);
-	pthread_mutex_unlock(&(philo->rules->fork[philo->id]));
-	if (philo->id + 1 < philo->rules->nb_philo)
-		pthread_mutex_unlock(&(philo->rules->fork[philo->id + 1]));
-	else if (philo->id != 0)
-		pthread_mutex_unlock(&(philo->rules->fork[0]));
-	if (still_eat(philo))
-		return ;
+	still_eat(philo);
 }

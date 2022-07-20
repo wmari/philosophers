@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:38:28 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 17:28:37 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 19:06:44 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,12 @@ int		done_eating(t_philosopher *philo);
 int		full_course(t_rules *rules);
 int		ft_atoi(const char *str);
 void	my_sleep(int time_to_do);
-void	ft_put_all(long int time, int id, char *str);
+void	ft_put_all(t_philosopher *philo, char *str);
+void	leave_fork_right(t_philosopher *philo);
+void	leave_fork_left(t_philosopher *philo);
+void	take_fork_right(t_philosopher *philo);
+void	take_fork_left(t_philosopher *philo);
+void	ft_put_nbr(int nbr);
+void	ft_put_lnbr(long int nbr);
+void	ft_put_str(char *str);
 #endif

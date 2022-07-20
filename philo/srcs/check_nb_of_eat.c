@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:49:43 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 15:37:30 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 19:10:55 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	still_eat(t_philosopher *philo)
 int	done_eating(t_philosopher *philo)
 {
 	pthread_mutex_lock(&(philo->check_eat));
-	if (philo->nb_of_eat== -1)
+	if (philo->nb_of_eat == -1)
 	{
 		pthread_mutex_unlock(&(philo->check_eat));
 		return (0);

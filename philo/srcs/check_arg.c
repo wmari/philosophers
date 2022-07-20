@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 18:31:43 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 19:36:52 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 19:12:27 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,24 @@ static int	invalid_argv(char **argv)
 
 int	check_arg(int argc, char **argv)
 {
-	if (!ft_atoi(argv[1]))
+	if (ft_atoi(argv[1]) == -1)
 	{
 		printf("Error, no philosopher here\n");
 		return (1);
+	}
+	if (ft_atoi(argv[2]) == -1 || ft_atoi(argv[3]) == -1
+		|| ft_atoi(argv[4]) == -1)
+	{
+		printf("Error, arguments too strong\n");
+		return (1);
+	}
+	if (argc == 6)
+	{
+		if (ft_atoi(argv[5]) == -1)
+		{
+			printf("Error, arguments too strong\n");
+			return (1);
+		}
 	}
 	return (invalid_argc(argc) || invalid_argv(argv));
 }

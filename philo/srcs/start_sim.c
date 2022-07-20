@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:03:21 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 19:24:29 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 18:25:06 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@ void	*start_sim(void *data)
 
 	philo = (t_philosopher *)data;
 	pthread_mutex_lock(&(philo->is_born));
+	gettimeofday(&(philo->birth), NULL);
 	if (philo->id % 2)
 		my_sleep(10);
-	print_str("is thinking", philo);
-	gettimeofday(&(philo->birth), NULL);
 	pthread_mutex_unlock(&(philo->is_born));
 	while (!deadyet(philo))
 	{
+		usleep(100);
+		print_str("is thinking", philo);
 		go_eat(philo);
 		if (done_eating(philo))
 			break ;

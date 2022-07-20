@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:46:09 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/19 17:27:45 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 18:22:52 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	deathloop(t_rules *rules)
 	i = 0;
 	while (1)
 	{
+		my_sleep(5);
 		while (i < rules->nb_philo)
 		{
 			if (check_death(rules->philo[i]))

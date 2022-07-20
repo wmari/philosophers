@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:15:57 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/20 19:10:13 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 19:32:40 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	check_death(t_philosopher *philo)
 		if (philo->rules->death.dead == 0)
 		{
 			philo->rules->death.dead = 1;
-			pthread_mutex_unlock(&(philo->rules->death.death));
 			print_str_death("is dead", philo);
+			pthread_mutex_unlock(&(philo->rules->death.death));
 		}
 		else
 			pthread_mutex_unlock(&(philo->rules->death.death));

@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:38:28 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/20 19:06:44 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 19:35:46 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	*start_sim(void *data);
 int		print_str(char *str, t_philosopher *philo);
 void	quit_philo(t_rules *rules);
 int		check_death(t_philosopher *philo);
-void	go_eat(t_philosopher *philo);
+int		go_eat(t_philosopher *philo);
 void	go_sleep(t_philosopher *philo);
 int		deadyet(t_philosopher *philo);
 int		print_str_death(char *str, t_philosopher *philo);

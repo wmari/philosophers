@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:15:28 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/20 19:12:00 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 19:53:29 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,19 @@ void	ft_put_all(t_philosopher *philo, char *str)
 	long int		time;
 	long int		time_phil;
 
-	pthread_mutex_lock(&(philo->rules->microphone));
-	gettimeofday(&watch, NULL);
-	time_phil = ((philo->rules->genese.time.tv_sec * 1000)
-			+ philo->rules->genese.time.tv_usec / 1000);
-	time = ((watch.tv_sec * 1000) + watch.tv_usec / 1000) - time_phil;
 	if (!deadyet(philo))
 	{
+		pthread_mutex_lock(&(philo->rules->microphone));
+		gettimeofday(&watch, NULL);
+		time_phil = ((philo->rules->genese.time.tv_sec * 1000)
+				+ philo->rules->genese.time.tv_usec / 1000);
+		time = ((watch.tv_sec * 1000) + watch.tv_usec / 1000) - time_phil;
 		ft_put_lnbr(time);
 		write(1, "\t", 1);
 		ft_put_nbr(philo->id);
 		write(1, "\t", 1);
 		ft_put_str(str);
 		write(1, "\n", 1);
+		pthread_mutex_unlock(&(philo->rules->microphone));
 	}
-	pthread_mutex_unlock(&(philo->rules->microphone));
 }

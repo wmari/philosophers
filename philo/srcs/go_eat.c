@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:45:50 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/20 18:55:04 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 19:42:05 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,19 @@ static void	go_eat_even(t_philosopher *philo)
 	leave_fork_left(philo);
 }
 
-void	go_eat(t_philosopher *philo)
+int	go_eat(t_philosopher *philo)
 {
-	if (philo->id + 1 > philo->rules->nb_philo && philo->id == 0)
+	if (philo->id + 1 >= philo->rules->nb_philo && philo->id == 0)
 	{
 		take_fork_right(philo);
-		my_sleep(philo->rules->time_to_die + 10);
+		my_sleep(philo->rules->time_to_die + 50);
+		leave_fork_right(philo);
+		return (1);
 	}
 	else if (philo->id % 2 == 0)
 		go_eat_even(philo);
 	else
 		go_eat_odd(philo);
 	still_eat(philo);
+	return (0);
 }

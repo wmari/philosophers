@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:46:09 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/20 18:22:52 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 19:37:56 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	main(int argc, char **argv)
 			start_sim, rules->philo[i]);
 		i++;
 	}
-	my_sleep(2);
 	deathloop(rules);
 	i = 0;
 	while (i < rules->nb_philo)

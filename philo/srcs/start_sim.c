@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:03:21 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/20 18:25:06 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/20 19:52:30 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	*start_sim(void *data)
 	{
 		usleep(100);
 		print_str("is thinking", philo);
-		go_eat(philo);
+		if (go_eat(philo))
+			break ;
 		if (done_eating(philo))
 			break ;
 		go_sleep(philo);

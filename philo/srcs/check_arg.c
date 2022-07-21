@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 18:31:43 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/20 19:12:27 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/21 14:20:08 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static int	invalid_argv(char **argv)
 
 int	check_arg(int argc, char **argv)
 {
+	if (invalid_argc(argc))
+		return (1);
 	if (ft_atoi(argv[1]) == -1)
 	{
 		printf("Error, no philosopher here\n");
@@ -64,5 +66,5 @@ int	check_arg(int argc, char **argv)
 			return (1);
 		}
 	}
-	return (invalid_argc(argc) || invalid_argv(argv));
+	return (invalid_argv(argv));
 }

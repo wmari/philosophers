@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:45:50 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/20 19:42:05 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/21 15:38:56 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ int	go_eat(t_philosopher *philo)
 		go_eat_even(philo);
 	else
 		go_eat_odd(philo);
-	still_eat(philo);
-	return (0);
+	usleep(100);
+	return (still_eat(philo));
 }

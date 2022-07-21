@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:46:09 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/20 19:37:56 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/21 15:41:33 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ static void	deathloop(t_rules *rules)
 		my_sleep(5);
 		while (i < rules->nb_philo)
 		{
-			if (check_death(rules->philo[i]))
+			if (done_eating(rules->philo[i]))
+				i++;
+			else if (check_death(rules->philo[i]))
 				break ;
-			i++;
+			else
+				i++;
 		}
 		if (deadyet(rules->philo[0]) || full_course(rules))
 			break ;
@@ -41,6 +44,11 @@ int	main(int argc, char **argv)
 		return (0);
 	i = 0;
 	rules = init_rules(argc, argv);
+	if (!rules)
+	{
+		printf("Error, initialisation failed\n");
+		return (0);
+	}
 	gettimeofday(&(rules->genese.time), NULL);
 	while (i < rules->nb_philo)
 	{

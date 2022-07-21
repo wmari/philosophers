@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 14:46:09 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/21 15:41:33 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/21 16:02:14 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (i < rules->nb_philo)
 		pthread_join(rules->philo[i++]->thread_id, NULL);
-	quit_philo(rules);
+	return (quit_philo(rules));
 }

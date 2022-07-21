@@ -6,13 +6,13 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:04:50 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/21 15:03:38 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/21 16:02:31 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-void	quit_philo(t_rules *rules)
+int	quit_philo(t_rules *rules)
 {
 	int	i;
 
@@ -27,4 +27,5 @@ void	quit_philo(t_rules *rules)
 	}
 	pthread_mutex_destroy(&(rules->death.death));
 	free(rules);
+	return (0);
 }

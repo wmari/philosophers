@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 15:09:07 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/20 19:10:38 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/21 14:06:45 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	print_str_death(char *str, t_philosopher *philo)
 	time = ((watch.tv_sec * 1000) + watch.tv_usec / 1000) - time_phil;
 	ft_put_lnbr(time);
 	write(1, "\t", 1);
-	ft_put_nbr(philo->id);
+	ft_put_nbr(philo->id + 1);
 	write(1, "\t", 1);
 	ft_put_str(str);
 	write(1, "\n", 1);

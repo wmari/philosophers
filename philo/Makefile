@@ -6,7 +6,7 @@
 #    By: wmari <wmari@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/07 10:08:22 by wmari             #+#    #+#              #
-#    Updated: 2022/07/20 18:55:30 by wmari            ###   ########.fr        #
+#    Updated: 2022/07/22 12:27:55 by wmari            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,8 @@ SRCS	=	$(addprefix srcs/, \
 
 OBJS	=	$(SRCS:.c=.o)
 
+INC		=	./inc/philo.h
+
 $(NAME)	:	$(OBJS)
 			$(CC) $(LFLAGS) -o $(NAME) $(OBJS)
 			
@@ -50,6 +52,8 @@ all		:	$(NAME)
 
 %.o		:	%.c
 			$(CC) $(CFLAGS) -pthread -c $< -o $@
+
+$(OBJS)	:	$(INC)
 
 clean	:
 			rm -f $(OBJS)

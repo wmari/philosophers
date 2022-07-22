@@ -6,7 +6,7 @@
 /*   By: wmari <wmari@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 14:15:28 by wmari             #+#    #+#             */
-/*   Updated: 2022/07/22 12:25:35 by wmari            ###   ########.fr       */
+/*   Updated: 2022/07/22 12:30:02 by wmari            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	put_any(long int time, int philo_id, char *str)
 {
 	ft_put_lnbr(time);
 	write(1, "\t", 1);
-	ft_put_nbr(philo->id + 1);
+	ft_put_nbr(philo_id + 1);
 	write(1, "\t", 1);
 	ft_put_str(str);
 	write(1, "\n", 1);
